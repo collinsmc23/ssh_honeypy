@@ -1,11 +1,9 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import paramiko
-from binascii import hexlify
 import threading
 import socket
 import argparse
-import sys
 
 # Constants.
 SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
@@ -87,7 +85,7 @@ def emulated_shell(channel, client_ip):
                 response = b"\n Goodbye!\n"
                 channel.close()
             elif command.strip() == b'pwd':
-                response = b"\n" + b"\usr\\local" + b"\r\n"
+                response = b"\n" + b"\\usr\\local" + b"\r\n"
                 funnel_logger.info(f'Command {command.strip()}' + "executed by " f'{client_ip}')
             elif command.strip() == b'whoami':
                 response = b"\n" + b"corpuser1" + b"\r\n"
@@ -181,4 +179,4 @@ if __name__ == "__main__":
     try:
         honeypot(args.address, args.port, args.username, args.password)
     except KeyboardInterrupt:
-        print("Program terminated...")
+        print("\nProgram terminated...")

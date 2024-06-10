@@ -3,3 +3,4 @@ server.key.pub
 cmd_audits.log.1
 cmd_audits.log
 creds_audits.log
+Dockerfile
