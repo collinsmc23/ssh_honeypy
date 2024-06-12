@@ -50,3 +50,24 @@ SSH_HONEYPY has two loggers configured. Loggers will route to either `cmd_audits
 `cmd_audits.log`: Captures IP address, username, password, and all commands supplied.
 
 `creds_audits.log`: Captures IP address, username, and password, comma seperated. Used to see how many hosts attempt to connect to SSH_HONEYPY.
+
+# Video Overview
+
+To be released.
+
+# Future Features
+
+- Systemd support to run Python script in background.
+- Docker support for host-based isolation and code deployment.
+- Write additional support for common protocols, Telnet, HTTP(S) web server, SMTP...
+- Create a basic overview Dashboard.
+- Add SSH Baner Tarpit to trap SSH sessions.
+
+# Helpful Resources
+
+Resources and guides used while developing project.
+
+- https://securehoney.net/blog/how-to-build-an-ssh-honeypot-in-python-and-docker-part-1.html 
+- https://medium.com/@abdulsamie488/deceptive-defense-building-a-python-honeypot-to-thwart-cyber-attackers-2a9d2ced2760
+- https://gist.github.com/cschwede/3e2c025408ab4af531651098331cce45
+- https://www.hostinger.com/tutorials/how-to-change-ssh-port-vps
