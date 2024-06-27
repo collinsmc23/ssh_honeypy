@@ -53,7 +53,7 @@ SSH_HONEYPY has two loggers configured. Loggers will route to either `cmd_audits
 
 # Video Overview
 
-To be released.
+[![YouTube Video](https://img.youtube.com/vi/tyKyLhcKgNo/0.jpg)](https://youtu.be/tyKyLhcKgNo)
 
 # Future Features
 
