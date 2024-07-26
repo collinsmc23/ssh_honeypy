@@ -4,6 +4,7 @@ import paramiko
 import threading
 import socket
 import argparse
+import time
 
 # Constants.
 SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
@@ -28,7 +29,7 @@ creds_handler = RotatingFileHandler('creds_audits.log', maxBytes=2000, backupCou
 creds_handler.setFormatter(logging_format)
 creds_logger.addHandler(creds_handler)
 
-
+ 
 # SSH Server Class. This establishes the options for the SSH server.
 class Server(paramiko.ServerInterface):
 
@@ -55,8 +56,6 @@ class Server(paramiko.ServerInterface):
                 return paramiko.AUTH_FAILED
         else:
             return paramiko.AUTH_SUCCESSFUL
-        #else:
-            #return paramiko.AUTH_SUCCESSFUL
     
     def check_channel_shell_request(self, channel):
         self.event.set()
@@ -103,10 +102,11 @@ def emulated_shell(channel, client_ip):
             channel.send(b"corporate-jumpbox2$ ")
             command = b""
 
-def client_handle(client, addr, username, password):
+def client_handle(client, addr, username, password, tarpit=False):
     client_ip = addr[0]
     print(f"{client_ip} connected to server.")
     try:
+    
         # Initlizes a Transport object using the socket connection from client.
         transport = paramiko.Transport(client)
         transport.local_version = SSH_BANNER
@@ -122,10 +122,18 @@ def client_handle(client, addr, username, password):
         if channel is None:
             print("No channel was opened.")
 
-        try:
-            # Send generic welcome banner to impersonate server.
-            channel.send("Welcome to Ubuntu 22.04 LTS (Jammy Jellyfish)!\r\n\r\n")
+        standard_banner = "Welcome to Ubuntu 22.04 LTS (Jammy Jellyfish)!\r\n\r\n"
         
+        try:
+            # Endless Banner: If tarpit option is passed, then send 'endless' ssh banner.
+            if tarpit:
+                endless_banner = standard_banner * 100
+                for char in endless_banner:
+                    channel.send(char)
+                    time.sleep(8)
+            # Standard Banner: Send generic welcome banner to impersonate server.
+            else:
+                channel.send(standard_banner)
             # Send channel connection to emulated shell for interpretation.
             emulated_shell(channel, client_ip=client_ip)
 
@@ -145,7 +153,7 @@ def client_handle(client, addr, username, password):
         
         client.close()
     
-def honeypot(address, port, username, password):
+def honeypot(address, port, username, password, tarpit=False):
     
     # Open a new socket using TCP, bind to port.
     socks = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -161,22 +169,23 @@ def honeypot(address, port, username, password):
             # Accept connection from client and address.
             client, addr = socks.accept()
             # Start a new thread to handle the client connection.
-            threading.Thread(target=client_handle, args=(client, addr, username, password)).start()
+            threading.Thread(target=client_handle, args=(client, addr, username, password, tarpit)).start()
         except Exception as error:
             # Generic catch all exception error code.
             print("!!! Exception - Could not open new client connection !!!")
             print(error)
 
 if __name__ == "__main__":
-    # Create parser
+    # Create parser and add arguments.
     parser = argparse.ArgumentParser() 
     parser.add_argument('-a','--address', type=str, required=True)
     parser.add_argument('-p','--port', type=int, required=True)
     parser.add_argument('-u', '--username', type=str)
     parser.add_argument('-w', '--password', type=str)
+    parser.add_argument('-t', '--tarpit', action="store_true")
     args = parser.parse_args()
     
     try:
-        honeypot(args.address, args.port, args.username, args.password)
+        honeypot(args.address, args.port, args.username, args.password, args.tarpit)
     except KeyboardInterrupt:
         print("\nProgram terminated...")

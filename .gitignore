@@ -3,4 +3,5 @@ server.key.pub
 cmd_audits.log.1
 cmd_audits.log
 creds_audits.log
+baseline_ssh.py
 Dockerfile
