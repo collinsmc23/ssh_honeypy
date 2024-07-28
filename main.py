@@ -14,7 +14,7 @@ SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
 host_key = paramiko.RSAKey(filename="server.key")
 
 # Logging Format.
-logging_format = logging.Formatter('%(asctime)s %(message)s')
+logging_format = logging.Formatter('%(message)s')
 
 # Funnel (catch all) Logger.
 funnel_logger = logging.getLogger('FunnelLogger')
