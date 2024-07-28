@@ -5,6 +5,7 @@ import threading
 import socket
 import argparse
 import time
+from web_honeypot import *
 
 # Constants.
 SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
@@ -152,7 +153,7 @@ def client_handle(client, addr, username, password, tarpit=False):
             pass
         
         client.close()
-    
+
 def honeypot(address, port, username, password, tarpit=False):
     
     # Open a new socket using TCP, bind to port.
@@ -162,14 +163,16 @@ def honeypot(address, port, username, password, tarpit=False):
 
     # Can handle 100 concurrent connections.
     socks.listen(100)
-    print(f"Server is listening on port {port}.")
+    print(f"SSH server is listening on port {port}.")
 
     while True: 
         try:
             # Accept connection from client and address.
             client, addr = socks.accept()
             # Start a new thread to handle the client connection.
-            threading.Thread(target=client_handle, args=(client, addr, username, password, tarpit)).start()
+            ssh_honeypot_thread = threading.Thread(target=client_handle, args=(client, addr, username, password, tarpit))
+            ssh_honeypot_thread.start()
+
         except Exception as error:
             # Generic catch all exception error code.
             print("!!! Exception - Could not open new client connection !!!")
@@ -182,10 +185,29 @@ if __name__ == "__main__":
     parser.add_argument('-p','--port', type=int, required=True)
     parser.add_argument('-u', '--username', type=str)
     parser.add_argument('-w', '--password', type=str)
+    parser.add_argument('-s', '--ssh', action="store_true")
     parser.add_argument('-t', '--tarpit', action="store_true")
+    parser.add_argument('-wh', '--http', action="store_true")
+    
     args = parser.parse_args()
     
     try:
-        honeypot(args.address, args.port, args.username, args.password, args.tarpit)
+        if args.ssh:
+            print("[-] Running SSH Honeypot...")
+            honeypot(args.address, args.port, args.username, args.password, args.tarpit)
+        elif args.http:
+            print('[-] Running HTTP Wordpress Honeypot...')
+            if not args.username:
+                args.username = "admin"
+                print("[-] Running with default username of admin...")
+            if not args.password:
+                args.password = "deeboodah"
+                print("[-] Running with default password of deeboodah...")
+            print(f"Port: {args.port} Username: {args.username} Password: {args.password}")
+            run_app(args.port, args.username, args.password)
+
+
+        else:
+            print("[!] You can only choose SSH (-s) (-ssh) or HTTP (-h) (-http) when running script.")
     except KeyboardInterrupt:
-        print("\nProgram terminated...")
+        print("\nProgram exited.")
