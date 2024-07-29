@@ -7,8 +7,8 @@ import requests
 import matplotlib.pyplot as plt
 
 
-log_file = 'creds_audits.log'
-cmd_log_file = 'cmd_audits.log'
+log_file = '/home/grant/projects/ssh-honeypot/test_log_files/creds_audits.log'
+cmd_log_file = '/home/grant/projects/ssh-honeypot/test_log_files/cmd_audits.log'
 
 def top_to_credential_dashboard(log_file):
 
@@ -42,7 +42,7 @@ def top_to_credential_dashboard(log_file):
     plt.ylabel('Username + Password')
     plt.title('Top 10 Username + Password Pairs')
     #plt.show()
-    return plt.savefig("/home/grant/ssh_honeypy/templates/top10creds.png")
+    return plt.savefig("/home/grant/projects/ssh-honeypot/templates/top10creds.png")
 
 top_to_credential_dashboard(log_file)
 
@@ -78,7 +78,7 @@ def top_cmd_commands(log_file):
     plt.xlabel('Count')
     plt.ylabel('Commmands')
     plt.title('Top 10 Commands Entered')
-    return plt.savefig("/home/grant/ssh_honeypy/templates/top10cmd.png")
+    return plt.savefig("/home/grant/projects/ssh-honeypot/templates/top10cmd.png")
 
 top_cmd_commands(cmd_log_file)
 
@@ -131,4 +131,3 @@ def ssh_honeypy_web_app():
     return ssh_honeypy_web_app
 
 app = ssh_honeypy_web_app()
-# app.run()

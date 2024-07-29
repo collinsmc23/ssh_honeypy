@@ -11,7 +11,7 @@ from web_honeypot import *
 SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
 
 # SSH Server Host Key.
-host_key = paramiko.RSAKey(filename="server.key")
+host_key = paramiko.RSAKey(filename="/home/grant/projects/ssh-honeypot/static/server.key")
 
 # Logging Format.
 logging_format = logging.Formatter('%(message)s')
@@ -19,14 +19,14 @@ logging_format = logging.Formatter('%(message)s')
 # Funnel (catch all) Logger.
 funnel_logger = logging.getLogger('FunnelLogger')
 funnel_logger.setLevel(logging.INFO)
-funnel_handler = RotatingFileHandler('cmd_audits.log', maxBytes=2000, backupCount=5)
+funnel_handler = RotatingFileHandler('/home/grant/projects/ssh-honeypot/test_log_files/cmd_audits.log', maxBytes=2000, backupCount=5)
 funnel_handler.setFormatter(logging_format)
 funnel_logger.addHandler(funnel_handler)
 
 # Credentials Logger. Captures IP Address, Username, Password.
 creds_logger = logging.getLogger('CredsLogger')
 creds_logger.setLevel(logging.INFO)
-creds_handler = RotatingFileHandler('creds_audits.log', maxBytes=2000, backupCount=5)
+creds_handler = RotatingFileHandler('/home/grant/projects/ssh-honeypot/test_log_files/creds_audits.log', maxBytes=2000, backupCount=5)
 creds_handler.setFormatter(logging_format)
 creds_logger.addHandler(creds_handler)
 

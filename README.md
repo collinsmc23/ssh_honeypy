@@ -59,9 +59,9 @@ SSH_HONEYPY has two loggers configured. Loggers will route to either `cmd_audits
 
 - Systemd support to run Python script in background.
 - Docker support for host-based isolation and code deployment.
-- ~~Write additional support for common protocols, Telnet, HTTP(S) web server, SMTP...~~ ✅
+- Write additional support for common protocols, Telnet, HTTP(S) web server, SMTP...~~ ✅
 - Create a basic overview Dashboard. 
-- ~~Add SSH Banner Tarpit to trap SSH sessions~~ ✅ (`-t, --tarpit`)
+- Add SSH Banner Tarpit to trap SSH sessions~~ ✅ (`-t, --tarpit`)
 
 # Helpful Resources
 

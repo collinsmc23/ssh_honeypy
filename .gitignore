@@ -5,3 +5,7 @@ cmd_audits.log
 creds_audits.log
 baseline_ssh.py
 Dockerfile
+http_audit.log
+static/
+Docker/
+test_log
