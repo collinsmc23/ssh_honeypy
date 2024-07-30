@@ -1,11 +1,5 @@
-server.key
-server.key.pub
-cmd_audits.log.1
-cmd_audits.log
-creds_audits.log
-baseline_ssh.py
-Dockerfile
-http_audit.log
-static/
+static/server.key
+static/server.key.pub
+static/images/top10creds.png
 Docker/
-test_log
+test_log_files/
