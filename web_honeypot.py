@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import logging
 from logging.handlers import RotatingFileHandler
-from ssh_honeypy_web_app import * 
+from dashboard_data_parser import * 
 
 # Logging Format.
 logging_format = logging.Formatter('%(asctime)s %(message)s')
