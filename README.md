@@ -1,4 +1,4 @@
-![Logo](https://github.com/collinsmc23/ssh_honeypy/blob/ssh_honeypy_web_app/static/images/Logo-White.png)
+![Logo](https://github.com/collinsmc23/ssh_honeypy/blob/ssh_honeypy_web_app/static/images/Logo.png)
 
 # 🍯 SSH_HONEYPY
 A basic python SSH honeypot to capture IP Adresses, usernames, passwords, and commands.
