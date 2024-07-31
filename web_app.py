@@ -6,8 +6,6 @@ from dashboard_data_parser import *
 
 from dash_bootstrap_templates import load_figure_template
 
-# This loads the "cyborg" and "minty" themed figure template from dash-bootstrap-templates library,
-# adds it to plotly.io and makes "cyborg" (The first template in the list) the default figure template.
 load_figure_template(["cyborg"])
 
 dbc_css = (
@@ -28,7 +26,11 @@ top_cmds = top_10_calculator(cmd_audits_log_df, "Command")
 get_ip_to_country = ip_to_country_code(creds_audits_log_df)
 top_country = top_10_calculator(get_ip_to_country, "Country_Code")
 
+image = 'assets/images/honeypy-logo-white.png'
+
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG, dbc_css])
+app.title = "HONEYPY"
+#app._favicon = "../static/images/Logo.png"
 
 tables = html.Div([
         dbc.Row([
@@ -38,6 +40,7 @@ tables = html.Div([
                     columns=[{"name": "IP Address", 'id': 'ip_address'}],
                     style_table={'width': '100%', 'color': 'black'},
                     style_cell={'textAlign': 'left', 'color': '#2a9fd6'},
+                    style_header={'fontWeight': 'bold'},
                     page_size=10
                 ),
             ),
@@ -47,6 +50,7 @@ tables = html.Div([
                     columns=[{"name": "Usernames", 'id': 'username'}],
                     style_table={'width': '100%'},
                     style_cell={'textAlign': 'left', 'color': '#2a9fd6'},
+                    style_header={'fontWeight': 'bold'},
                     page_size=10
                 ),
             ),
@@ -55,8 +59,9 @@ tables = html.Div([
                 dash_table.DataTable(
                     data=creds_audits_log_df.to_dict('records'),
                     columns=[{"name": "Passwords", 'id': 'password'}],
-                    style_table={'width': '100%','justifyContent': 'center', 'font-weight': 'bold'},
+                    style_table={'width': '100%','justifyContent': 'center'},
                     style_cell={'textAlign': 'left', 'color': '#2a9fd6'},
+                    style_header={'fontWeight': 'bold'},
                     page_size=10
                 ),
             ),       
@@ -70,7 +75,7 @@ apply_table_theme = html.Div(
 
 app.layout = dbc.Container([
     # Honeypot Title.
-    html.Div(children="HONEYPY", style={'textAlign': 'center', "fontsize": 50, "font-family": 'sans-serif'}, className="dbc"),
+    html.Div([html.Img(src=image, style={'height': '25%', 'width': '25%'})], style={'textAlign': 'center'}, className='dbc'),
     # Row 1 - 3 Top 10 Dashboards.
     dbc.Row([
         dbc.Col(dcc.Graph(figure=px.bar(top_ip_address, x="ip_address", y='count')), width=4),
@@ -87,11 +92,17 @@ app.layout = dbc.Container([
     ], align='center', class_name='mb-4'),
 
     # Table Titles.
-    html.Div(children="Intelligence Data", style={'textAlign': 'center', "fontsize": "750", "font-family": 'sans-serif', 'font-weight': 'bold'}, className="dbc"),
+    html.Div([
+        html.H3(
+            "Intelligence Data", 
+            style={'textAlign': 'center', "font-family": 'Consolas, sans-serif', 'font-weight': 'bold'}, 
+        ),
+        ]),
+    #html.Div(children="Intelligence Data", style={'textAlign': 'center', "fontsize": "750", "font-family": 'sans-serif', 'font-weight': 'bold'}, className="dbc"),
     # Row 3: Tables with data.
     apply_table_theme
 
-    # 
+    
 
 ])
 

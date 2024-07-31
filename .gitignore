@@ -1,5 +1,6 @@
 static/server.key
 static/server.key.pub
-static/images/top10creds.png
+assets/images/top10cmd.png
+assets/images/top10creds.png
 Docker/
 test_log_files/
