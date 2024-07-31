@@ -1,17 +1,25 @@
+# Import library dependencies.
 import logging
 from logging.handlers import RotatingFileHandler
 import paramiko
 import threading
 import socket
-import argparse
 import time
-from web_honeypot import *
-
+from pathlib import Path
 # Constants.
 SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
 
+# Constants.
+# Get base directory of where user is running honeypy from.
+base_dir = base_dir = Path(__file__).parent.parent
+# Source creds_audits.log & cmd_audits.log file path.
+server_key = base_dir / 'ssh-honeypot' / 'static' / 'server.key'
+
+creds_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'creds_audits.log'
+cmd_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'cmd_audits.log'
+
 # SSH Server Host Key.
-host_key = paramiko.RSAKey(filename="/home/grant/projects/ssh-honeypot/static/server.key")
+host_key = paramiko.RSAKey(filename=server_key)
 
 # Logging Format.
 logging_format = logging.Formatter('%(message)s')
@@ -19,14 +27,14 @@ logging_format = logging.Formatter('%(message)s')
 # Funnel (catch all) Logger.
 funnel_logger = logging.getLogger('FunnelLogger')
 funnel_logger.setLevel(logging.INFO)
-funnel_handler = RotatingFileHandler('/home/grant/projects/ssh-honeypot/test_log_files/cmd_audits.log', maxBytes=2000, backupCount=5)
+funnel_handler = RotatingFileHandler(cmd_audits_log_local_file_path, maxBytes=2000, backupCount=5)
 funnel_handler.setFormatter(logging_format)
 funnel_logger.addHandler(funnel_handler)
 
 # Credentials Logger. Captures IP Address, Username, Password.
 creds_logger = logging.getLogger('CredsLogger')
 creds_logger.setLevel(logging.INFO)
-creds_handler = RotatingFileHandler('/home/grant/projects/ssh-honeypot/test_log_files/creds_audits.log', maxBytes=2000, backupCount=5)
+creds_handler = RotatingFileHandler(creds_audits_log_local_file_path, maxBytes=2000, backupCount=5)
 creds_handler.setFormatter(logging_format)
 creds_logger.addHandler(creds_handler)
 
@@ -177,37 +185,3 @@ def honeypot(address, port, username, password, tarpit=False):
             # Generic catch all exception error code.
             print("!!! Exception - Could not open new client connection !!!")
             print(error)
-
-if __name__ == "__main__":
-    # Create parser and add arguments.
-    parser = argparse.ArgumentParser() 
-    parser.add_argument('-a','--address', type=str, required=True)
-    parser.add_argument('-p','--port', type=int, required=True)
-    parser.add_argument('-u', '--username', type=str)
-    parser.add_argument('-w', '--password', type=str)
-    parser.add_argument('-s', '--ssh', action="store_true")
-    parser.add_argument('-t', '--tarpit', action="store_true")
-    parser.add_argument('-wh', '--http', action="store_true")
-    
-    args = parser.parse_args()
-    
-    try:
-        if args.ssh:
-            print("[-] Running SSH Honeypot...")
-            honeypot(args.address, args.port, args.username, args.password, args.tarpit)
-        elif args.http:
-            print('[-] Running HTTP Wordpress Honeypot...')
-            if not args.username:
-                args.username = "admin"
-                print("[-] Running with default username of admin...")
-            if not args.password:
-                args.password = "deeboodah"
-                print("[-] Running with default password of deeboodah...")
-            print(f"Port: {args.port} Username: {args.username} Password: {args.password}")
-            run_app(args.port, args.username, args.password)
-
-
-        else:
-            print("[!] You can only choose SSH (-s) (-ssh) or HTTP (-h) (-http) when running script.")
-    except KeyboardInterrupt:
-        print("\nProgram exited.")

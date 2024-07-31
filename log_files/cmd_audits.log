@@ -1,0 +1,18 @@
+Command b'hi'executed by 127.0.0.1
+Command b'pwd'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'ls'executed by 127.0.0.1
+Command b'cat jumpbox1.conf'executed by 127.0.0.1
+Client 127.0.0.1 attempted connection with username: test, password: hi
+Command b'clear'executed by 127.0.0.1
+Client 127.0.0.1 attempted connection with username: user, password: hi
+Command b'whoami'executed by 127.0.0.1
+Command b'ami\x7f\x7f\x7f'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
