@@ -45,7 +45,7 @@ app.title = "HONEYPY"
 app._favicon = "../assets/images/honeypy-favicon.ico"
 
 # Set the value to True if you want country code lookup as default. This does have impact on performance by default.
-# If the script is erroring out with a Rate Limiting Error (HTTP CODE 429), set country to False, this will not
+# If the script is erroring out with a Rate Limiting Error (HTTP CODE 429), set country to False, this will not look up country codes and will not show dashboard.
 country = False
 def country_lookup(country):
     if country:
