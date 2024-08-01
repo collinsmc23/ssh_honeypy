@@ -86,7 +86,10 @@ Run `python3 web_app.py` on localhost. Default port for Python Dash is `8050`. `
 - By default, the country code lookup is set to `False`, as this will have impact on how long it takes to provision the honeypot (pandas has to pivot on dataframes, which takes time). Set the `COUNTRY` environment variable to `True` if you would like to get the country code lookup dashboard panel.
 - If receiving rate limiting errors, change the `COUNTRY` environment variable in `public.env` to `False` again. 
 
+
 HONEPY leverages Python Dash to populate the bar charts, Dash Bootstrap Components for dark-theme and style of charts, and Pandas for data parsing.
+
+# VPS Hosting (General Tips)
 
 # Video Overview
 
