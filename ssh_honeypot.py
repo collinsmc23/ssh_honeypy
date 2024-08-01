@@ -13,10 +13,10 @@ SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
 # Get base directory of where user is running honeypy from.
 base_dir = base_dir = Path(__file__).parent.parent
 # Source creds_audits.log & cmd_audits.log file path.
-server_key = base_dir / 'ssh-honeypot' / 'static' / 'server.key'
+server_key = base_dir / 'ssh_honeypy' / 'static' / 'server.key'
 
-creds_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'creds_audits.log'
-cmd_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'cmd_audits.log'
+creds_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'creds_audits.log'
+cmd_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'cmd_audits.log'
 
 # SSH Server Host Key.
 host_key = paramiko.RSAKey(filename=server_key)

@@ -9,7 +9,7 @@ from pathlib import Path
 logging_format = logging.Formatter('%(asctime)s %(message)s')
 
 base_dir = base_dir = Path(__file__).parent.parent
-http_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'http_audit.log'
+http_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'http_audit.log'
 
 # HTTP Logger.
 funnel_logger = logging.getLogger('HTTPLogger')

@@ -23,8 +23,6 @@ if __name__ == "__main__":
     try:
         if args.ssh:
             print("[-] Running SSH Honeypot...")
-            if args.nocountry:
-                nocountry = False
             honeypot(args.address, args.port, args.username, args.password, args.tarpit)
 
         elif args.http:

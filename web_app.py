@@ -15,8 +15,8 @@ from honeypy import *
 # Get base directory of where user is running honeypy from.
 base_dir = base_dir = Path(__file__).parent.parent
 # Source creds_audits.log & cmd_audits.log file path.
-creds_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'creds_audits.log'
-cmd_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'cmd_audits.log'
+creds_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'creds_audits.log'
+cmd_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'cmd_audits.log'
 # Load dotenv() to capture environment variable.
 dotenv_path = Path('public.env')
 load_dotenv(dotenv_path=dotenv_path)
