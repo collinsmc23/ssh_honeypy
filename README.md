@@ -72,7 +72,7 @@ Using Python Flask as a basic template to provision a simple web service, HONEYP
 There are default credentials accepted, `admin` and `deeboodah`, which will proceed to a Rick Roll gif. Username and password can be changed using the `-u / --username: Username.
 -w / --password: Password` arguments.
 
-The web-based honeypot runs on port 80 by default. This can be changed in the `WEB_PORT` environment variable to your choosing.
+The web-based honeypot runs on port 5000 by default. This can be changed using the `-p / --port` flag option.
 
 💡 There is currently not a dashboard panel supported for HTTP-based results. This will be a future addition.
 

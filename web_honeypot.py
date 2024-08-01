@@ -5,7 +5,6 @@ from logging.handlers import RotatingFileHandler
 from dashboard_data_parser import * 
 from pathlib import Path
 
-
 # Logging Format.
 logging_format = logging.Formatter('%(asctime)s %(message)s')
 
