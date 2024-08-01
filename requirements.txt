@@ -4,3 +4,14 @@ threading
 socket
 argparse
 time
+os
+dash
+dash_bootstrap_components
+plotly.express
+dash_bootstrap_templates
+pathlib
+dotenv
+requests
+flask
+
+
