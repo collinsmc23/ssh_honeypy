@@ -14,6 +14,14 @@ Ensure `main.py` has proper permisions. (`chmod 755 main.py`)
 
 **3) Keygen.**
 
+Create a new folder `static`. 
+
+`mkdir static`
+
+Move into directory.
+
+`cd static`
+
 An RSA key must be generated for the SSH server host key. The SSH host key provides proper identification for the SSH server. Ensure the key is titled `server.key` and resides in the same relative directory to the main program.
 
 `ssh-keygen -t rsa -b 2048 -f server.key`

@@ -16,3 +16,5 @@ Command b'whoami'executed by 127.0.0.1
 Command b'whoami'executed by 127.0.0.1
 Command b'whoami'executed by 127.0.0.1
 Command b'whoami'executed by 127.0.0.1
+Client 127.0.0.1 attempted connection with username: test, password: hi
+Client 127.0.0.1 attempted connection with username: bones, password: bones
