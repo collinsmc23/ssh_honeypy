@@ -10,7 +10,7 @@ dash_bootstrap_components
 plotly.express
 dash_bootstrap_templates
 pathlib
-dotenv
+python-dotenv
 requests
 flask
 

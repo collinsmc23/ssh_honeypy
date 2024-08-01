@@ -46,7 +46,7 @@ def baseline_web_honeypot(input_username="admin", input_password="deeboodah"):
 
 def run_app(port=5000, input_username="admin", input_password="deeboodah"):
      app = baseline_web_honeypot(input_username, input_password)
-     app.run(debug=True, port=port)
+     app.run(debug=True, port=port, host="0.0.0.0")
 
      return app
 
