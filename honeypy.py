@@ -16,7 +16,6 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--ssh', action="store_true")
     parser.add_argument('-t', '--tarpit', action="store_true")
     parser.add_argument('-wh', '--http', action="store_true")
-    parser.add_argument('-nc', '--nocountry', action="store_true")
     
     args = parser.parse_args()
     
