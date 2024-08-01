@@ -1,3 +1,4 @@
+![HONEPY-Logo](../assets/images/honeypy-logo-black-text.png)
 
 A modular, graphic-based honeypot to capture IP Adresses, usernames, passwords, and commands from various protocols (SSH & HTTP supported right now). Written in Python.
 
@@ -96,8 +97,8 @@ HONEPY leverages Python Dash to populate the bar charts, Dash Bootstrap Componen
 - Write additional support for common protocols:
 - Telnet 
 - HTTP ✅
-- HTTP(S)
-- SMTP
+    - HTTP(S)
+    - SMTP
 - Docker support for host-based isolation and code deployment.
 - Systemd support to run Python script in background. ✅
 - Create a basic overview Dashboard. ✅
