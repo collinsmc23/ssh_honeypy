@@ -4,6 +4,8 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 from dash_bootstrap_templates import load_figure_template
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Import project python file dependencies.
 from dashboard_data_parser import *
@@ -15,6 +17,9 @@ base_dir = base_dir = Path(__file__).parent.parent
 # Source creds_audits.log & cmd_audits.log file path.
 creds_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'creds_audits.log'
 cmd_audits_log_local_file_path = base_dir / 'ssh-honeypot' / 'log_files' / 'cmd_audits.log'
+# Load dotenv() to capture environment variable.
+dotenv_path = Path('public.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 # Pass log files to dataframe conversion.
 creds_audits_log_df = parse_creds_audits_log(creds_audits_log_local_file_path)
@@ -44,11 +49,12 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG, dbc_css])
 app.title = "HONEYPY"
 app._favicon = "../assets/images/honeypy-favicon.ico"
 
-# Set the value to True if you want country code lookup as default. This does have impact on performance by default.
-# If the script is erroring out with a Rate Limiting Error (HTTP CODE 429), set country to False, this will not look up country codes and will not show dashboard.
-country = False
+# Set the value to True in (public.env) if you want country code lookup as default. This does have impact on performance by default.
+# If the script is erroring out with a Rate Limiting Error (HTTP CODE 429), set country to False in (public.env), this will not look up country codes and will not show dashboard.
+country = os.getenv('COUNTRY')
+# Fucntion to get country code lookup if country = True. This does have impact on performance. Default is set to False.
 def country_lookup(country):
-    if country:
+    if country == 'True':
         get_ip_to_country = ip_to_country_code(creds_audits_log_df)
         top_country = top_10_calculator(get_ip_to_country, "Country_Code")
         message = dbc.Col(dcc.Graph(figure=px.bar(top_country, x="Country_Code", y='count')), style={'width': '33%', 'display': 'inline-block'})
@@ -112,9 +118,6 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col(dcc.Graph(figure=px.bar(top_cmds, x='Command', y='count')), style={'width': '33%', 'display': 'inline-block'}),
         country_lookup(country)
-        #dbc.Col(dcc.Graph(figure=px.bar(top_country, x="Country_Code", y='count')), style={'width': '33%', 'display': 'inline-block'}),
-        # Add another graph or placeholder if needed to make the rows even
-       
     ], align='center', class_name='mb-4'),
 
     # Table Titles.
