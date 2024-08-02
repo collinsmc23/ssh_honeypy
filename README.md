@@ -96,7 +96,7 @@ Run `python3 web_app.py` on localhost. Default port for Python Dash is `8050`. `
 
 HONEPY leverages Python Dash to populate the bar charts, Dash Bootstrap Components for dark-theme and style of charts, and Pandas for data parsing.
 
-<img src="/assets/images/Dashboard.PNG" alt="Dashboard" width="300"/>
+<img src="/assets/images/Dashboard.PNG" alt="Dashboard" width="600"/>
 
 # VPS Hosting (General Tips)
 To host on VPS, follow the general tips.
