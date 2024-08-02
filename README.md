@@ -100,6 +100,29 @@ HONEPY leverages Python Dash to populate the bar charts, Dash Bootstrap Componen
 # VPS Hosting (General Tips)
 To host on VPS, follow the general tips.
 
+To gather logging information, it's advised to use a Virtual Private Server (VPS). VPS's are cloud-based hosts with Internet access. This provides a safe, isolated way to gather real-time information without having to configure and isolate infrastructure on your home network.
+
+A majority of VPS hosting providers will provide a Virtual Firewall where you can open ports. Ensure to open ports used by HONEYPY.
+- `Port 80`, `Port 5000`, `Port 2223` (Whichever port you configure to listen on real SSH connection), `Port 8050`. 
+
+When working on Linux-based distributions, also open the ports with IP Tables or Unfiltered Firewall (UFW). 
+- `ufw enable`
+- `ufw allow [port]`
+
+# Running in Background With Systemd
+To run HONEPY in the background, you can use Systemd for popular Linux-based distributions.
+
+There is a template included under the systemd folder in this repo.
+
+Supply the required arguments after the `honeypy.py` to run with your desired configuration. Use your favorite text editor to change the configuration.
+- `ExecStart=/usr/bin/python3 /honeypy.py -a 127.0.0.1 -p 22 --ssh`
+
+Reload systemd with the new configuration added, `systemctl daemon-reload`.
+
+Enable the `honeypy.service` file with `systemctl enable honeypy.service`.  
+
+Start the `honepy.service` file with `systemctl start honepy.service`.
+
 # Video Overview
 
 [![YouTube Video](https://img.youtube.com/vi/tyKyLhcKgNo/0.jpg)](https://youtu.be/tyKyLhcKgNo)
@@ -111,6 +134,10 @@ To host on VPS, follow the general tips.
     - HTTP ✅
     - HTTP(S)
     - SMTP
+    - RDP
+    - DNS
+    - Telnet
+- Custom DNS support.
 - Docker support for host-based isolation and code deployment.
 - Systemd support to run Python script in background. ✅
 - Create a basic overview Dashboard. ✅

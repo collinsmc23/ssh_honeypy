@@ -2,7 +2,7 @@
 Description=HONEPY.
 
 [Service]
-ExecStart=/usr/bin/python3 /main.py
+ExecStart=/usr/bin/python3 /honeypy.py
 Restart=always
 
 [Install]
