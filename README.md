@@ -28,7 +28,7 @@ An RSA key must be generated for the SSH server host key. The SSH host key provi
 
 # Usage
 
-To provision a new instance of HONEYPY, use the `honeypy.py` file. This is the main interface for the program.
+To provision a new instance of HONEYPY, use the `honeypy.py` file. This is the main file to interface with for HONEYPY. 
 
 HONEYPY requires a bind IP address (`-a`) and network port to listen on (`-p`). Use `0.0.0.0` to listen on all network interfaces. The protocol type must also be defined.
 
@@ -38,7 +38,7 @@ HONEYPY requires a bind IP address (`-a`) and network port to listen on (`-p`). 
 -s / --ssh OR -wh / --http: Declare honeypot type.
 ```
 
-Example: `python3 main.py -a 0.0.0.0 -p 22 --ssh`
+Example: `python3 honeypy.py -a 0.0.0.0 -p 22 --ssh`
 
 💡 If HONEPY is set up to listen on a privileged port (22), the program must be run with `sudo` or root privileges. No other services should be using the specified port. 
 
@@ -90,12 +90,13 @@ HONEYPY comes packaged with a `web_app.py` file. This can be run in a seperate t
 
 Run `python3 web_app.py` on localhost. Default port for Python Dash is `8050`. `http://127.0.0.1:8050`. Go to your browser of choice to view dashboard metrics.
 
-💡 The dashboard data includes a country code lookup that uses the IP address to determine the two-digit country code. To get the IP address, the ipinfo() CleanTalk API is used. Due to rate limiting contraints, CleanTalk can only lookup 1000 IP addresses per 60 seconds. 
+💡 The dashboard data includes a country code lookup that uses the IP address to determine the two-digit country code. To get the IP address, the [ipinfo() CleanTalk API](https://cleantalk.org/help/api-ip-info-country-code) is used. Due to rate limiting contraints, CleanTalk can only lookup 1000 IP addresses per 60 seconds. 
 - By default, the country code lookup is set to `False`, as this will have impact on how long it takes to provision the honeypot (pandas has to pivot on dataframes, which takes time). Set the `COUNTRY` environment variable to `True` if you would like to get the country code lookup dashboard panel.
 - If receiving rate limiting errors, change the `COUNTRY` environment variable in `public.env` to `False` again. 
 
-
 HONEPY leverages Python Dash to populate the bar charts, Dash Bootstrap Components for dark-theme and style of charts, and Pandas for data parsing.
+
+<img src="/assets/images/Dashboard.PNG" alt="Dashboard" width="300"/>
 
 # VPS Hosting (General Tips)
 To host on VPS, follow the general tips.
@@ -145,6 +146,8 @@ Start the `honepy.service` file with `systemctl start honepy.service`.
 - Docker support for host-based isolation and code deployment.
 - Systemd support to run Python script in background. ✅
 - Create a basic overview Dashboard. ✅
+- Dynamic Dashboard Updates.
+- Dashboard hosted on seperate host to get results independent on honeypot host.
 - Add SSH Banner Tarpit to trap SSH sessions ✅ (`-t, --tarpit`)
 
 # Helpful Resources
