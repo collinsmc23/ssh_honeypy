@@ -117,6 +117,8 @@ There is a template included under the systemd folder in this repo.
 Supply the required arguments after the `honeypy.py` to run with your desired configuration. Use your favorite text editor to change the configuration.
 - `ExecStart=/usr/bin/python3 /honeypy.py -a 127.0.0.1 -p 22 --ssh`
 
+Copy `honeypy.service` template file into `/etc/systemd/system`. `cp honeypy.service /etc/systemd/system`.
+
 Reload systemd with the new configuration added, `systemctl daemon-reload`.
 
 Enable the `honeypy.service` file with `systemctl enable honeypy.service`.  
