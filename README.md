@@ -10,7 +10,7 @@ A modular, graphic-based honeypot to capture IP Adresses, usernames, passwords, 
 **2) Permissions.**
 Move into `ssh_honeypy` folder.
 
-Ensure `main.py` has proper permisions. (`chmod 755 main.py`)
+Ensure `main.py` has proper permisions. (`chmod 755 honeypy.py`)
 
 **3) Keygen.**
 
@@ -42,7 +42,13 @@ Example: `python3 honeypy.py -a 0.0.0.0 -p 22 --ssh`
 
 💡 If HONEPY is set up to listen on a privileged port (22), the program must be run with `sudo` or root privileges. No other services should be using the specified port. 
 
-If port 22 is being used as the listener, the default SSH port must be changed. Refer to Hostinger's "(How to Change the SSH Port)[https://www.hostinger.com/tutorials/how-to-change-ssh-port-vps]" guide.
+If port 22 is being used as the listener, the default SSH port must be changed. Refer to Hostinger's "[How to Change the SSH Port](https://www.hostinger.com/tutorials/how-to-change-ssh-port-vps)" guide.
+
+❗ To run with `sudo`, the `root` account must have access to all Python libraries used in this project (libraries defined in `requirements.txt`). Install by switching to the root account, then supply:
+
+`root@my_host# pip install -r requirements`
+
+This will install all the packages for the root user, but it will affect the global environment and isn't considered the "safeest" way to do this.
 
 **Optional Arguments**
 
@@ -54,7 +60,7 @@ A username (`-u`) and password (`-w`) can be specified to authenticate the SSH s
 -t / --tarpit: For SSH-based honeypots, -t can be used to trap sessions inside the shell, by sending a 'endless' SSH banner.
 ```
 
-Example: `python3 main.py -a 0.0.0.0 -p 22 --ssh -u admin -p admin --tarpit`
+Example: `python3 main.py -a 0.0.0.0 -p 22 --ssh -u admin -w admin --tarpit`
 
 # Logging Files
 
@@ -65,6 +71,8 @@ HONEYPY has three loggers configured. Loggers will route to either `cmd_audits.l
 `creds_audits.log`: Captures IP address, username, and password, comma seperated. Used to see how many hosts attempt to connect to SSH_HONEYPY.
 
 `http_audit.log`: Captures IP address, username, password.
+
+The log files will be located in `../ssh_honeypy/log_files/..`
 
 # Honeypot Types
 This honeypot was written with modularity in mind to support future honeypot types (Telnet, HTTPS, SMTP, etc). As of right now there are two honeypot types supported.
