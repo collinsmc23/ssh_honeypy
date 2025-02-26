@@ -1,1 +1,9 @@
 
+Client 127.0.0.1 attempted connection with username: username, password: 
+Client 127.0.0.1 attempted connection with username: username, password: password
+Command b'hi'executed by 127.0.0.1
+Command b'j'executed by 127.0.0.1
+Command b'hiii'executed by 127.0.0.1
+Command b'jiiii'executed by 127.0.0.1
+Command b'whoami'executed by 127.0.0.1
+Command b'cat jumpbox.1'executed by 127.0.0.1

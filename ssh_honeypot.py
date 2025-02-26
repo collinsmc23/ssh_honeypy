@@ -185,3 +185,4 @@ def honeypot(address, port, username, password, tarpit=False):
             # Generic catch all exception error code.
             print("!!! Exception - Could not open new client connection !!!")
             print(error)
+honeypot('127.0.0.1', 2223 , 'username', 'password')

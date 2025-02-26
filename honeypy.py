@@ -12,7 +12,7 @@ if __name__ == "__main__":
     parser.add_argument('-a','--address', type=str, required=True)
     parser.add_argument('-p','--port', type=int, required=True)
     parser.add_argument('-u', '--username', type=str)
-    parser.add_argument('-w', '--password', type=str)
+    parser.add_argument('-pw', '--password', type=str)
     parser.add_argument('-s', '--ssh', action="store_true")
     parser.add_argument('-t', '--tarpit', action="store_true")
     parser.add_argument('-wh', '--http', action="store_true")
@@ -33,7 +33,7 @@ if __name__ == "__main__":
                 args.username = "admin"
                 print("[-] Running with default username of admin...")
             if not args.password:
-                args.password = "deeboodah"
+                args.password = "booh"
                 print("[-] Running with default password of deeboodah...")
             print(f"Port: {args.port} Username: {args.username} Password: {args.password}")
             run_app(args.port, args.username, args.password)
