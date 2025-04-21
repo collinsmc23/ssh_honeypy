@@ -82,13 +82,21 @@ def emulated_shell(channel, client_ip):
     command = b""
     while True:  
         char = channel.recv(1)
-        channel.send(char)
+
         if not char:
             channel.close()
+            break
 
-        command += char
+        if char == b"\x08" or char == b"\x7f": # Backspace handling functionality
+            if command:
+                command = command[:-1] # Remove last character
+                channel.send(b"\b \b") # Move our cursor back, erase character
+        else: 
+            command += char
+            channel.send(char)
+            
         # Emulate common shell commands.
-        if char == b"\r":
+        if char == b"\r":  # Enter pressed
             if command.strip() == b'exit':
                 response = b"\n Goodbye!\n"
                 channel.close()
